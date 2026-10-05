@@ -22,6 +22,7 @@ for p in products:
     print(p, "->", p.discount(10))
 
 class Cart:
+    """A shopping cart that holds products and calculates the total."""
     def __init__(self):
         self.items = []
 
