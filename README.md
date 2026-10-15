@@ -42,8 +42,9 @@ Then open http://127.0.0.1:8000/docs.
 Start the local model server in one terminal, then run the agent in another:
 
 ```bash
-ollama serve
-python agent.py
+ollama serve               # terminal 1: keep it running
+ollama pull qwen2.5:7b     # terminal 2, first time only
+python agent.py            # terminal 2
 ```
 
 ## Run with Docker
@@ -74,3 +75,9 @@ Notes:
 - The Deployment runs 2 replicas. If a pod is deleted, Kubernetes starts a replacement.
 - `imagePullPolicy: Never` makes Kubernetes use the locally built image.
 - Each pod has its own SQLite file, so data created in one pod is not shared with the other. A real deployment would use a shared database such as Postgres.
+
+## Limitations and next steps
+
+- No CI/CD pipeline yet. Builds and deployments are done by hand. A next step is a GitHub Actions workflow that tests the API and builds the Docker image on every push.
+- The agent runs on a small local model, so it can make mistakes. The tools and the real cart are the source of truth.
+- There are no automated tests yet.
